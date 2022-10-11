@@ -10,12 +10,15 @@ module.exports = {
         filename: "[name].[hash].js"
     },
     devServer: {
-        port:3000
+        port: 3000
     },
     plugins: [
-        new HtmlWebpackPlugin({template: "./src/index.html"}),
+        new HtmlWebpackPlugin({ template: "./src/index.html" }),
         new CleanWebpackPlugin()
     ],
+    resolve: {
+        extensions: ['.js', '.json', '.jsx'],
+    },
     module: {
         rules: [
             {
@@ -30,20 +33,20 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                  loader: "babel-loader",
-                  options: {
-                    presets: ['@babel/preset-env']
-                  }
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
                 }
             },
             {
                 test: /\.jsx$/,
                 exclude: /node_modules/,
                 use: {
-                  loader:  "babel-loader",
-                  options: {
-                    presets: ["@babel/preset-react"]
-                  }
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@babel/preset-react"]
+                    }
                 }
             }
         ]
