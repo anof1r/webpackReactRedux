@@ -13,4 +13,12 @@ module.exports = {
         new HtmlWebpackPlugin({template: "./src/index.html"}),
         new CleanWebpackPlugin()
     ],
+    module: {
+        rules: [
+            {
+                test: /\.(css|less)$/,
+                use: ["style-loader", "css-loader", "less-loader"]
+            }
+        ]
+    }
 }
