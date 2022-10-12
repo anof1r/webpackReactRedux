@@ -1,23 +1,19 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { setCount } from '../reducers/reposReducer'
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './app.less'
+import Main from './main/Main'
 
 function App() {
-  const [number, setNumber] = useState(1)
-  const dispatch = useDispatch()
-  const count = useSelector(state => state.repos.count)
-  const onCountClick = () => {
-    setNumber(number + 1)
-    dispatch(setCount(number))
-  }
+
   return (
-    <div className='app'>
-      <button onClick={() => onCountClick()}>Increase number</button>
-      <div>
-        {count}
+    <BrowserRouter>
+      <div className='container'>
+        <Routes>
+          <Route path="/" element={<Main />}>
+          </Route>
+        </Routes>
       </div>
-    </div>
+    </BrowserRouter>
   )
 }
 
