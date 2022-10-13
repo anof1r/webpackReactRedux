@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentPage } from '../../reducers/reposReducer'
+import { createPages } from '../../utils/pagesCreator'
 import { getRepos } from '../actions/repos'
 import './main.less'
 import Repo from './repo/Repo'
@@ -12,20 +13,19 @@ function Main() {
     const currentPage = useSelector(state => state.repos.currentPage)
     const totalCount = useSelector(state => state.repos.totalCount)
     const perPage = useSelector(state => state.repos.perPage)
-
     const [searchValue, setSearchValue] = useState("")
+    const pagesCount = Math.ceil(totalCount/perPage)
+    const pages = []
+    createPages(pages, pagesCount, currentPage)
 
-    const pages = [1, 2, 3, 4, 5]
-
-    useEffect(() => {
+    useEffect(()=>{
         dispatch(getRepos(searchValue, currentPage, perPage))
     }, [currentPage])
 
-    const searchHandler = () => {
-        dispatch(currentPage(1))
+    function searchHandler() {
+        dispatch(setCurrentPage(1))
         dispatch(getRepos(searchValue, currentPage, perPage))
     }
-
     return (
         <div className='container'>
             <div className='search'>
